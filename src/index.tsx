@@ -34,7 +34,9 @@ class GaBeacon {
     this.proxy = proxy;
   }
 
-  pageview() {
+  pageview(
+    props: { [prop in keyof PageviewPayload]?: PageviewPayload[prop] } = {}
+  ) {
     const payload: PageviewPayload = {
       tid: this.tid,
       t: "pageview",
@@ -47,6 +49,7 @@ class GaBeacon {
       dt: document.title,
       ua: `${navigator.userAgent}`,
       dr: `${document.referrer}`,
+      ...props,
     };
 
     this.send(payload);
