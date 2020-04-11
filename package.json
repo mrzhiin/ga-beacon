@@ -1,14 +1,16 @@
 {
-  "name": "ga-beacon",
+  "name": "@mrzhiin/ga-beacon",
   "version": "0.1.0",
+  "description": "Google Analytics Beacon",
   "license": "MIT",
+  "author": "MrZhiin",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "webpack --env.production"
+    "build": "webpack --env.production",
+    "build:declaration": "tsc"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
-    "dotenv-webpack": "^1.7.0",
     "html-webpack-plugin": "^4.0.4",
     "pnp-webpack-plugin": "^1.6.4",
     "ts-loader": "^6.2.2",
@@ -17,5 +19,14 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
+  },
+  "files": [
+    "build",
+    "types/*.d.ts"
+  ],
+  "main": "./build/gabeacon.js",
+  "types": "./types/index.d.ts",
+  "publishConfig": {
+    "access": "public"
   }
 }

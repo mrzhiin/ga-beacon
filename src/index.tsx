@@ -23,7 +23,7 @@ interface PageviewPayload {
   t: "pageview";
 }
 
-class GaBeacon {
+export default class GaBeacon {
   // 跟踪 ID
   tid: string;
   // 代理地址
@@ -55,10 +55,9 @@ class GaBeacon {
     this.send(payload);
   }
 
-  send(data) {
+  send(data: PageviewPayload) {
     navigator.sendBeacon(this.proxy, JSON.stringify(data));
   }
 }
 
-export default GaBeacon;
 export { GaBeacon };

@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const Dotenv = require("dotenv-webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
@@ -30,7 +29,7 @@ const common = {
       },
     ],
   },
-  plugins: [new Dotenv(), new webpack.ProgressPlugin()],
+  plugins: [new webpack.ProgressPlugin()],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     plugins: [PnpWebpackPlugin],
