@@ -23,15 +23,24 @@ interface PageviewPayload {
   t: "pageview";
 }
 
+interface Options {
+  tid: string;
+  proxy: string;
+  type?: "formData" | "textJson";
+}
+
 export default class GaBeacon {
   // 跟踪 ID
   tid: string;
   // 代理地址
   proxy: string;
+  // 内容类型
+  type: "formData" | "textJson";
 
-  constructor({ tid = "", proxy = "" }) {
+  constructor({ tid, proxy, type = "textJson" }: Options) {
     this.tid = tid;
     this.proxy = proxy;
+    this.type = type;
   }
 
   pageview(
@@ -55,8 +64,22 @@ export default class GaBeacon {
     this.send(payload);
   }
 
-  send(data: PageviewPayload) {
-    navigator.sendBeacon(this.proxy, JSON.stringify(data));
+  send(preload: PageviewPayload) {
+    let data: FormData | string;
+
+    if (this.type === "textJson") {
+      data = JSON.stringify(preload);
+    } else {
+      const formData = new FormData();
+
+      for (let [key, value] of Object.entries(preload)) {
+        formData.append(key, value);
+      }
+
+      data = formData;
+    }
+
+    navigator.sendBeacon(this.proxy, data);
   }
 }
 
